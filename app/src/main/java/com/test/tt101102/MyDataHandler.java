@@ -16,6 +16,7 @@ public class MyDataHandler extends DefaultHandler {
     boolean isTitle = false;
     boolean isItem = false;
     ArrayList<String> XMLData = new ArrayList<>();
+    ArrayList<String> XMLLink = new ArrayList<>();
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
