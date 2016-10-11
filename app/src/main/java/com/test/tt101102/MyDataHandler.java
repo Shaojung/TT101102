@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class MyDataHandler extends DefaultHandler {
     boolean isTitle = false;
     boolean isItem = false;
+    boolean isLink = false;
     ArrayList<String> XMLData = new ArrayList<>();
     ArrayList<String> XMLLink = new ArrayList<>();
 
@@ -29,6 +30,10 @@ public class MyDataHandler extends DefaultHandler {
         {
             isItem = true;
         }
+        if (qName.equals("link"))
+        {
+            isLink = true;
+        }
     }
 
     @Override
@@ -42,6 +47,10 @@ public class MyDataHandler extends DefaultHandler {
         {
             isItem = false;
         }
+        if (qName.equals("link"))
+        {
+            isLink = false;
+        }
     }
 
     @Override
@@ -52,6 +61,11 @@ public class MyDataHandler extends DefaultHandler {
             String fetchStr = new String(ch).substring(start, start + length);
             XMLData.add(fetchStr);
             Log.d("TITLE", fetchStr);
+        }
+        if (isLink == true && isItem == true)
+        {
+            String fetchStr = new String(ch).substring(start, start + length);
+            XMLLink.add(fetchStr);
         }
     }
 }
