@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.xml.sax.InputSource;
@@ -23,14 +25,14 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tv;
+    ListView lv;
     MyDataHandler dataHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dataHandler = new MyDataHandler();
-        tv = (TextView) findViewById(R.id.textView);
+        lv = (ListView) findViewById(R.id.listView);
 
         new Thread(){
             @Override
@@ -62,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            tv.setText("Finish");
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+                                            android.R.layout.simple_list_item_1, dataHandler.XMLData);
+                            lv.setAdapter(adapter);
                         }
                     });
 
